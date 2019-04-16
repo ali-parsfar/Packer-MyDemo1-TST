@@ -11,7 +11,7 @@
         "instance_type": "t2.micro",
         "region": "ap-southeast-2",
         "ssh_username": "ec2-user",
-        "ami_name": "fxa-lnx-web01-DevOpsChallenge2",
+        "ami_name": "AWSLNX2-MyDemo1-01",
         "source_ami_filter": {
           "filters": {
             "virtualization-type": "hvm",
@@ -22,17 +22,17 @@
           "most_recent": true
         }
     }],
+
     "provisioners": [
         {
-        "type": "file",
-        "source": "files/web01",
-        "destination": "~/web01"
-        },
-        {
-        "type": "shell",
-        "inline": [
-           "sudo chmod +x ~/web01/script.sh",
-           "sudo ~/web01/script.sh" 
-                  ]
-    }]
-  }
+        "type": "ansible",
+         "playbook_file": "go.yml",
+         "extra_arguments":  "-vv"
+    }],
+
+    "post-processors": [{
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+}]
+}

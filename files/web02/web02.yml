@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: whoami
+    command: id  
+
+  - name: Install httpd service
+    yum: name=httpd state=latest
+
+#  - name: Upload website files
+#    copy: src=www/index.html dest=/var/www/html/index.html mode=0644
+#    copy: src=www/Capture.JPG dest=/var/www/html/Capture.JPG  mode=0644
+#
+#  - name: ensure httpd is running
+#    service: name=httpd state=restarted enabled=yes
